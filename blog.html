@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
+<link href="main.css" rel="stylesheet"/>
+<script src="app.js"></script>
+  <meta charset="utf-8">
+  <title>BLOG</title>
+</head>
+<body ng-app="app">
+  <div class="topbar">
+			<div class="wrapper">
+				<span class="title">Blog name</span>
+				<button class="nav_button" onclick="nav();"></button>
+				<nav id="nav">
+					<button class="close_nav" onclick="nav();">Close</button>
+					<a href="#/">Home</a>
+					<a href="#/about.html">About</a>
+					<a href="#/contact.html">Contact</a>
+					<a href="#/subscribe.html">Subscribe</a>
+                                        <a href="#/add.html">About</a>
+				</nav>
+			</div>
+		</div>
+  <div ng-controller="firstCtrl">
+  <div class="wrapper posts">
+<div ng-repeat="post in posts" class="post">
+  <div class="col-sm-6">
+          <div class="row"><img src="{{post.image}}"></img></div>
+          <button class="share"></button>
+          <span class="title">{{post.title}}</span>
+           <div class="row">created on {{post.createdOn| date}}</div>
+           <div class="row text-info">{{post.body[0]|limitTo:70 }}</div>
+         <footer>  <div class="row">by {{post.author}}</div></footer>
+        <button class="glyphicon glyphicon-thumbs-up" ng-click="post.likes=post.likes+1">{{post.likes}}</button>
+         
+         comment:<ul>
+      <li ng-repeat="comment in post.comments">{{comment.content}}   -by  {{comment.author}}</li>
+      </ul>
+          <form name="commentform" novalidate class="form-group">
+            Comment:
+               <textarea name="comment" ng-model="post.comment.content" class="form-control" required></textarea>
+            Name:
+               <input type="text" name="author" ng-model="post.comment.author" class="form-control"><br>
+     <button type="submit" class="btn btn-default" ng-disabled="commentform.$invalid" value="submit" ng-click="addComment(post)">submit</button>
+</form>
+</div> 
+
+</div>
+</div>
+      </div>
+    
+    
+      
+   
+</body>
+</html>
